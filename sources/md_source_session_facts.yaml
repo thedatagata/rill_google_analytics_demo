@@ -3,6 +3,6 @@
 
 type: source
 
-connector: "duckdb"
-db: "../data_swamp.duckdb"
-sql: "SELECT * FROM source_data.src_sessions_fct"
+connector: "motherduck"
+dsn: "md:rill_demo"
+sql: "select * from rill_demo.main.md_src_session_fct"

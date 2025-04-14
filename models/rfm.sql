@@ -9,5 +9,5 @@ SELECT
   , AVG(COALESCE(e.session_totals__transaction_revenue, 0) / 1000000.0) AS monetary_value
   , SUM(COALESCE(e.session_totals__transaction_revenue, 0) / 1000000.0) AS total_revenue
 
-FROM src_session_facts e 
+FROM md_source_session_facts e 
 GROUP BY 1

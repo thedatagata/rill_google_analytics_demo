@@ -4,7 +4,7 @@
 version: 1
 type: metrics_view
 
-model: src_session_facts
+model: md_source_session_facts
 timeseries: session_start_time
 
 dimensions: 
