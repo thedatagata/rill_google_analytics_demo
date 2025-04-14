@@ -1,0 +1,46 @@
+# Metrics View YAML
+# Reference documentation: https://docs.rilldata.com/reference/project-files/metrics-views
+
+version: 1
+type: metrics_view
+
+model: src_session_facts
+timeseries: session_start_time
+
+dimensions: 
+  - column: session_device__browser
+    label: "Session Browser"
+  - column: session_device__os
+    label: "Session OS"
+  - column: session_device__device_category
+    label: "Session Device Category"
+  - column: session_device__is_mobile
+    label: "Session Is Mobile"
+  - column: session_geo__continent
+    label: "Session Continent"
+  - column: session_geo__sub_continent
+    label: "Session Sub Continent"
+  - column: session_geo__country
+    label: "Session Country"
+  - column: session_traffic_source__referrer
+    label: "Session Referrer"
+  - column: session_traffic_source__source
+    label: "Session Source"
+  - column: session_traffic_source__medium
+    label: "Session Medium"
+  - column: session_traffic_source__campaign
+    label: "Session Campaign"
+
+measures:
+  - expression: "SUM(session_totals__pageviews)"
+    label: "Total Pageviews"
+  - expression: "SUM(session_totals__time_on_site)"
+    label: "Total Time on Site"
+  - expression: "SUM(ROUND(1.0 * session_totals__transaction_revenue / 1000000, 2))"
+    label: "Total Revenue"
+  - expression: "AVG(session_totals__pageviews)"
+    label: "Average Pageviews"
+  - expression: "AVG(session_totals__time_on_site)"
+    label: "Average Time on Site"
+  - expression: "AVG(ROUND(1.0 * session_totals__transaction_revenue / 1000000, 2))"
+    label: "Average Order Value"
