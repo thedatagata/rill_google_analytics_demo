@@ -5,4 +5,4 @@ type: source
 
 connector: "motherduck"
 dsn: "md:rill_demo"
-sql: "select * from rill_demo.main.md_src_session_fct"
+sql: "select * from rill_demo.main.md_src_sessions_fct"
