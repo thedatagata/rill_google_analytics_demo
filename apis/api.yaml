@@ -5,4 +5,4 @@
 type: api
 
 sql:
-  select * from rfm
+  select * from rfm limit 10000
