@@ -4,43 +4,116 @@
 version: 1
 type: metrics_view
 
-model: md_source_session_facts
+
+model: ga_sessions
+display_name: Web Session Analytics
+title: Web Session Analytics Dashboard # Optional: Title shown in the UI
+description: Analysis of user sessions, traffic sources, engagement, and revenue. # Optional: Description for the UI
+
+
 timeseries: session_start_time
 
-dimensions: 
-  - column: session_device__browser
-    label: "Session Browser"
-  - column: session_device__os
-    label: "Session OS"
-  - column: session_device__device_category
-    label: "Session Device Category"
-  - column: session_device__is_mobile
-    label: "Session Is Mobile"
-  - column: session_geo__continent
-    label: "Session Continent"
-  - column: session_geo__sub_continent
-    label: "Session Sub Continent"
-  - column: session_geo__country
-    label: "Session Country"
-  - column: session_traffic_source__referrer
-    label: "Session Referrer"
-  - column: session_traffic_source__source
-    label: "Session Source"
-  - column: session_traffic_source__medium
-    label: "Session Medium"
-  - column: session_traffic_source__campaign
-    label: "Session Campaign"
 
+dimensions:
+  - name: session_browser
+    label: Browser
+    column: session_browser
+    description: The web browser used during the session.
+
+  - name: session_os
+    label: Operating System
+    column: session_os
+    description: The operating system of the device used during the session.
+
+  - name: session_device_category
+    label: Device Category
+    column: session_device_category
+    description: The category of the device (e.g., desktop, mobile, tablet).
+
+  - name: session_device_is_mobile
+    label: Is Mobile Device
+    column: session_device_is_mobile
+    description: Indicates if the session was on a mobile device (true/false).
+
+  - name: session_continent
+    label: Continent
+    column: session_continent
+    description: The continent from which the session originated.
+
+  - name: session_sub_continent
+    label: Sub Continent
+    column: session_sub_continent
+    description: The sub-continent from which the session originated.
+
+  - name: session_country
+    label: Country
+    column: session_country
+    description: The country from which the session originated.
+
+  - name: session_referrer
+    label: Referrer
+    column: session_referrer
+    description: The referring URL that led the user to the site.
+
+  - name: session_source
+    label: Source
+    column: session_source
+    description: The source of the traffic (e.g., google, facebook, direct).
+
+  - name: session_medium
+    label: Medium
+    column: session_medium
+    description: The medium of the traffic (e.g., organic, cpc, email, referral).
+
+  - name: session_campaign
+    label: Campaign
+    column: session_campaign
+    description: The marketing campaign associated with the session.
+
+# ---- Measures ----
+# Numerical aggregations calculated from the data.
 measures:
-  - expression: "SUM(session_totals__pageviews)"
-    label: "Total Pageviews"
-  - expression: "SUM(session_totals__time_on_site)"
-    label: "Total Time on Site"
-  - expression: "SUM(ROUND(1.0 * session_totals__transaction_revenue / 1000000, 2))"
-    label: "Total Revenue"
-  - expression: "AVG(session_totals__pageviews)"
-    label: "Average Pageviews"
-  - expression: "AVG(session_totals__time_on_site)"
-    label: "Average Time on Site"
-  - expression: "AVG(ROUND(1.0 * session_totals__transaction_revenue / 1000000, 2))"
-    label: "Average Order Value"
+  - name: total_sessions
+    label: Total Sessions
+    expression: COUNT(DISTINCT session_id)
+    description: The total number of unique sessions.
+   
+  - name: total_hits
+    label: Total Hits
+    expression: SUM(session_total_hits)
+    description: The total number of hits (interactions) across all sessions.
+    
+  - name: total_pageviews
+    label: Total Pageviews
+    expression: SUM(session_total_pageviews)
+    description: The total number of pageviews across all sessions.
+    
+  - name: total_time_on_site_seconds
+    label: Total Time On Site (Seconds)
+    expression: SUM(session_total_time_on_site)
+    description: The sum of time spent on site across all sessions, in seconds.
+    
+  - name: avg_session_duration_seconds
+    label: Avg. Session Duration (Seconds)
+    expression: AVG(session_total_time_on_site)
+    description: The average time spent per session, in seconds.
+    
+  - name: avg_pageviews_per_session
+    label: Avg. Pageviews per Session
+    expression: AVG(session_total_pageviews)
+    description: The average number of pageviews per session.
+    
+  - name: avg_hits_per_session
+    label: Avg. Hits per Session
+    expression: AVG(session_total_hits)
+    description: The average number of hits (interactions) per session.
+    
+  - name: total_revenue
+    label: Total Revenue
+    expression: SUM(total_transaction_revenue)
+    description: The total revenue generated from transactions across all sessions.
+
+  - name: avg_revenue_per_session
+    label: Avg. Revenue per Session
+    expression: AVG(total_transaction_revenue)
+    description: The average transaction revenue generated per session.

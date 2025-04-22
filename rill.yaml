@@ -1,6 +1,6 @@
 compiler: rillv1
 
-display_name: "Rill Google Analytics Demo"
+display_name: "rill-ga-demo"
 
 # These are example mock users to test your security policies.
 # Learn more: https://docs.rilldata.com/manage/security

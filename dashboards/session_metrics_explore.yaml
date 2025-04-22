@@ -3,7 +3,7 @@
 
 type: explore
 
-display_name: "Session Metrics dashboard"
+display_name: "Web Session Analytics dashboard"
 metrics_view: session_metrics
 
 dimensions: '*'
